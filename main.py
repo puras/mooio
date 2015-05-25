@@ -16,11 +16,11 @@ log.addHandler(hdlr)
 log.setLevel(logging.INFO)
 
 def do_download(root_url):
-    print '开始加载页面'
-    log.info('开始加载页面:%s' % root_url)
+    print u'开始加载页面'
+    log.info(u'开始加载页面:%s' % root_url)
     d = pq(url=root_url)
     posts = d('div.m-post')
-    log.info('本页共有 %s 组图片' % len(posts))
+    log.info(u'本页共有 %s 组图片' % len(posts))
     for post in posts:
         dd = pq(post)
         img = dd('img')
@@ -37,23 +37,18 @@ def do_download(root_url):
         pic_file = '%s/thumbnails_%s' % (folder, thumbnails)
         if not os.path.exists(pic_file):
             urllib.urlretrieve(pic, pic_file)
-        # print os.path.abspath(folder)
-        print pic
-        print name
-        print picid
-        print thumbnails
         print '开始加载子页面'
-        log.info('正在加载: %s' % name)
-        log.info('开始加载子页面:%s' % picurl)
-        print folder
+        log.info(u'正在加载: %s' % name)
+        log.info(u'开始加载子页面:%s' % picurl)
+        log.info(u'存入文件夹: %s' % folder)
         sd = pq(url=picurl)
         pics = sd('div.pic')
         num_file = '%s/pic_num.txt' % folder
         nf = open(num_file, 'w')
         nf.write('共有 %s 张图' % len(pics))
         nf.close()
-        print '共有 %s 张图' % len(pics)
-        log.info('共有 %s 张图' % len(pics))
+        print u'共有 %s 张图' % len(pics)
+        log.info(u'共有 %s 张图' % len(pics))
         for spic in pics:
             sdd = pq(spic)
             sexy_pic = sdd('img').attr('src')
@@ -62,10 +57,10 @@ def do_download(root_url):
             print sexy_name
             sexy_file = '%s/%s' % (folder, sexy_name)
             if not os.path.exists(sexy_file):
-                log.info('正在下载：%s' % sexy_pic)
+                log.info(u'正在下载：%s' % sexy_pic)
                 urllib.urlretrieve(sexy_pic, sexy_file)
             else:
-                log.info('本图片已下载: %s' % sexy_pic)
+                log.info(u'本图片已下载: %s' % sexy_pic)
             # break
 
         # break
@@ -77,7 +72,7 @@ if __name__ == '__main__':
         print i
         download_url = '%s%d' % (root_url, i)
         print download_url
-        log.info('当前下载地址: %s' % download_url)
+        log.info(u'当前下载地址: %s' % download_url)
 
         do_download(download_url)
 
