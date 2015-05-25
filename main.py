@@ -6,9 +6,18 @@ from pyquery import PyQuery as pq
 
 import urllib
 import os
+import logging
+
+log = logging.getLogger('mooio')
+hdlr = logging.FileHandler(os.path.join('mooio.log'))
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+log.addHandler(hdlr)
+log.setLevel(logging.INFO)
 
 def do_download(root_url):
     print '开始加载页面'
+    log.info('开始加载页面:%s' % root_url)
     d = pq(url=root_url)
     posts = d('div.m-post')
     for post in posts:
@@ -33,6 +42,7 @@ def do_download(root_url):
         print picid
         print thumbnails
         print '开始加载子页面'
+        log.info('开始加载子页面:%s' % picurl)
         print folder
         sd = pq(url=picurl)
         pics = sd('div.pic')
@@ -41,6 +51,7 @@ def do_download(root_url):
         nf.write('共有 %s 张图' % len(pics))
         nf.close()
         print '共有 %s 张图' % len(pics)
+        log.info('共有 %s 张图' % len(pics))
         for spic in pics:
             sdd = pq(spic)
             sexy_pic = sdd('img').attr('src')
@@ -49,14 +60,23 @@ def do_download(root_url):
             print sexy_name
             sexy_file = '%s/%s' % (folder, sexy_name)
             if not os.path.exists(sexy_file):
+                log.info('正在下载：%s' % sexy_pic)
                 urllib.urlretrieve(sexy_pic, sexy_file)
+            else:
+                log.info('本图片已下载: %s' % sexy_pic)
             # break
 
         # break
 
 if __name__ == '__main__':
-    root_url = 'http://sexy.faceks.com/'
+    root_url = 'http://sexy.faceks.com/?page='
 
-    do_download(root_url)
+    for i in range(1, 40):
+        print i
+        download_url = '%s%d' % (root_url, i)
+        print download_url
+        log.info('当前下载地址: %s' % download_url)
+
+        do_download(download_url)
 
     print 'Download has finished.'
