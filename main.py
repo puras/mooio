@@ -37,7 +37,7 @@ def do_download(root_url):
         pic_file = '%s/thumbnails_%s' % (folder, thumbnails)
         if not os.path.exists(pic_file):
             urllib.urlretrieve(pic, pic_file)
-        print os.path.abspath(folder)
+        # print os.path.abspath(folder)
         print pic
         print name
         print picid
