@@ -20,6 +20,7 @@ def do_download(root_url):
     log.info('开始加载页面:%s' % root_url)
     d = pq(url=root_url)
     posts = d('div.m-post')
+    log.info('本页共有 %s 组图片' % len(posts))
     for post in posts:
         dd = pq(post)
         img = dd('img')
@@ -42,6 +43,7 @@ def do_download(root_url):
         print picid
         print thumbnails
         print '开始加载子页面'
+        log.info('正在加载: %s' % name)
         log.info('开始加载子页面:%s' % picurl)
         print folder
         sd = pq(url=picurl)
