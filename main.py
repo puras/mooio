@@ -56,9 +56,9 @@ def do_download(root_url):
         for spic in pics:
             sdd = pq(spic)
             sexy_pic = sdd('img').attr('src')
-            print sexy_pic
+            # print sexy_pic
             sexy_name = sexy_pic.split('/')[len(sexy_pic.split('/')) - 1]
-            print sexy_name
+            # print sexy_name
             sexy_file = '%s/%s' % (folder, sexy_name)
             if not os.path.exists(sexy_file):
                 print u'正在下载：%s' % sexy_pic
