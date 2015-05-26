@@ -16,11 +16,11 @@ import os
 # log.setLevel(logging.INFO)
 
 def do_download(root_url):
-    print '开始加载页面:%s' % root_url
+    print u'开始加载页面:%s' % root_url
     # log.info(u'开始加载页面:%s' % root_url)
     d = pq(url=root_url)
     posts = d('div.m-post')
-    print '本页共有 %s 组图片' % len(posts)
+    print u'本页共有 %s 组图片' % len(posts)
     # log.info(u'本页共有 %s 组图片' % len(posts))
     for post in posts:
         dd = pq(post)
@@ -39,9 +39,9 @@ def do_download(root_url):
         if not os.path.exists(pic_file):
             urllib.urlretrieve(pic, pic_file)
 
-        print '正在加载: %s' % name
-        print '开始加载子页面:%s' % picurl
-        print '存入文件夹: %s' % folder
+        print u'正在加载: %s' % name
+        print u'开始加载子页面:%s' % picurl
+        print u'存入文件夹: %s' % folder
         # log.info(u'正在加载: %s' % name)
         # log.info(u'开始加载子页面:%s' % picurl)
         # log.info(u'存入文件夹: %s' % folder)
@@ -51,7 +51,7 @@ def do_download(root_url):
         nf = open(num_file, 'w')
         nf.write('共有 %s 张图' % len(pics))
         nf.close()
-        print '共有 %s 张图' % len(pics)
+        print u'共有 %s 张图' % len(pics)
         # log.info(u'共有 %s 张图' % len(pics))
         for spic in pics:
             sdd = pq(spic)
@@ -61,11 +61,11 @@ def do_download(root_url):
             print sexy_name
             sexy_file = '%s/%s' % (folder, sexy_name)
             if not os.path.exists(sexy_file):
-                print '正在下载：%s' % sexy_pic
+                print u'正在下载：%s' % sexy_pic
                 # log.info(u'正在下载：%s' % sexy_pic)
                 urllib.urlretrieve(sexy_pic, sexy_file)
             else:
-                print '本图片已下载: %s' % sexy_pic
+                print u'本图片已下载: %s' % sexy_pic
                 # log.info(u'本图片已下载: %s' % sexy_pic)
             # break
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     for i in range(1, 40):
         print i
         download_url = '%s%d' % (root_url, i)
-        print '当前下载地址: %s' % download_url
+        print u'当前下载地址: %s' % download_url
         # log.info(u'当前下载地址: %s' % download_url)
 
         do_download(download_url)
