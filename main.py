@@ -27,6 +27,7 @@ def do_download(root_url):
         img = dd('img')
         p = dd('p')
         picurl = dd('a.img').attr('href')
+	print picurl
         url_arrs = picurl.split('/')
         picid = url_arrs[len(url_arrs) - 1]
         name = p.text()
@@ -63,7 +64,10 @@ def do_download(root_url):
             if not os.path.exists(sexy_file):
                 print u'正在下载：%s' % sexy_pic
                 # log.info(u'正在下载：%s' % sexy_pic)
-                urllib.urlretrieve(sexy_pic, sexy_file)
+		try:
+                    urllib.urlretrieve(sexy_pic, sexy_file)
+		except IOError:
+		    print u'下载失败: %s' % sexy_pic
             else:
                 print u'本图片已下载: %s' % sexy_pic
                 # log.info(u'本图片已下载: %s' % sexy_pic)
@@ -74,7 +78,7 @@ def do_download(root_url):
 if __name__ == '__main__':
     root_url = 'http://sexy.faceks.com/?page='
 
-    for i in range(1, 40):
+    for i in range(26, 40):
         print i
         download_url = '%s%d' % (root_url, i)
         print u'当前下载地址: %s' % download_url
