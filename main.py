@@ -82,7 +82,7 @@ def do_download(root_url):
 if __name__ == '__main__':
     root_url = 'http://sexy.faceks.com/?page='
 
-    for i in range(26, 40):
+    for i in range(33, 40):
         print i
         download_url = '%s%d' % (root_url, i)
         print u'当前下载地址: %s' % download_url
