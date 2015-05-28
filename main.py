@@ -27,7 +27,8 @@ def do_download(root_url):
         img = dd('img')
         p = dd('p')
         picurl = dd('a.img').attr('href')
-	print picurl
+        if picurl is None:
+            return
         url_arrs = picurl.split('/')
         picid = url_arrs[len(url_arrs) - 1]
         name = p.text()
@@ -64,10 +65,10 @@ def do_download(root_url):
             if not os.path.exists(sexy_file):
                 print u'正在下载：%s' % sexy_pic
                 # log.info(u'正在下载：%s' % sexy_pic)
-		try:
-                    urllib.urlretrieve(sexy_pic, sexy_file)
-		except IOError:
-		    print u'下载失败: %s' % sexy_pic
+        try:
+            urllib.urlretrieve(sexy_pic, sexy_file)
+        except IOError:
+            print u'下载失败: %s' % sexy_pic
             else:
                 print u'本图片已下载: %s' % sexy_pic
                 # log.info(u'本图片已下载: %s' % sexy_pic)
