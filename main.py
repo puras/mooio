@@ -88,9 +88,6 @@ if __name__ == '__main__':
         print u'当前下载地址: %s' % download_url
         # log.info(u'当前下载地址: %s' % download_url)
 
-        # do_download(download_url)
-        name = u'我爱中华人民共和国'
-        print len(name)
-        print name[0:8]
+        do_download(download_url)
 
     print 'Download has finished.'
