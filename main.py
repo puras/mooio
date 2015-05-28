@@ -33,6 +33,8 @@ def do_download(root_url):
         url_arrs = picurl.split('/')
         picid = url_arrs[len(url_arrs) - 1]
         name = p.text()
+        if len(name) > 50:
+            name = name[0:50]
         pic = img.attr('src')
         thumbnails = pic.split('/')[len(pic.split('/')) - 1]
         folder = 'sexy/%s_%s' % (name, picid)
@@ -86,6 +88,9 @@ if __name__ == '__main__':
         print u'当前下载地址: %s' % download_url
         # log.info(u'当前下载地址: %s' % download_url)
 
-        do_download(download_url)
+        # do_download(download_url)
+        name = u'我爱中华人民共和国'
+        print len(name)
+        print name[0:8]
 
     print 'Download has finished.'
