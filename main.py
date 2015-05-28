@@ -28,6 +28,7 @@ def do_download(root_url):
         p = dd('p')
         picurl = dd('a.img').attr('href')
         if picurl is None:
+            print u'%s 无子页链接' % p.text()
             return
         url_arrs = picurl.split('/')
         picid = url_arrs[len(url_arrs) - 1]
